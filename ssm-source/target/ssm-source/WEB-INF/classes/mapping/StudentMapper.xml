@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.dao.StudentMapper">
+
+    <resultMap id="student" type="com.tech.entity.Student">
+        <result column="name" property="name" />
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="AddTime" property="addTime"/>
+        <result column="UpdateTime" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insertStudent" parameterType="map">
+        INSERT INTO Student
+        (
+        name,
+        age,
+        sex,
+        AddTime,
+        UpdateTime
+        )
+        VALUES (
+        #{student.name},
+        #{student.age},
+        #{student.sex},
+        #{student.addTime},
+        #{student.updateTime}
+        )
+    </insert>
+
+    <select id="loadStudentById" parameterType="map" resultMap="student">
+        SELECT
+        ID,
+        name,
+        age,
+        sex,
+        AddTime,
+        UpdateTime
+        FROM Student
+        WHERE ID = #{id}
+    </select>
+</mapper>
