@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ssm-source</module>
+        <module>mybatis-code</module>
     </modules>
 
 
