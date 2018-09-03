@@ -1,0 +1,8 @@
+com\tech\hystrix\TestCollapseCommand.class
+com\tech\service\serviceImpl\StudentServiceImpl.class
+com\tech\service\StudentService.class
+com\tech\hystrix\TestCommand.class
+com\tech\testClass.class
+com\tech\dao\StudentMapper.class
+com\tech\entity\Student.class
+com\tech\controller\StudentController.class

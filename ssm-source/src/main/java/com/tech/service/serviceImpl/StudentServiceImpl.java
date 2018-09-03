@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xiexinjia
@@ -18,12 +19,17 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public void addStudent(){
+    public String addStudent(){
 
         Student student = buildStudent();
         studentMapper.insertStudent(student);
+
+        return "ok!";
+    }
+
+    public void addStudentBatch(List<Student> studentList){
+        studentMapper.insertStudentBatch(studentList);
         System.out.printf("ok!");
-        return;
     }
 
     private Student buildStudent(){

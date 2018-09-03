@@ -28,6 +28,28 @@
         )
     </insert>
 
+    <insert id="insertStudentBatch" parameterType="map">
+        INSERT INTO Student
+        (
+        name,
+        age,
+        sex,
+        AddTime,
+        UpdateTime
+        )
+        VALUES
+        <foreach collection="studentList" index="index" separator="," item="student">
+            (
+            #{student.name},
+            #{student.age},
+            #{student.sex},
+            #{student.addTime},
+            #{student.updateTime}
+            )
+        </foreach>
+
+    </insert>
+
     <select id="loadStudentById" parameterType="map" resultMap="student">
         SELECT
         ID,
