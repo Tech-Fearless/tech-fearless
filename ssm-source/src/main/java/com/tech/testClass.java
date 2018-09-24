@@ -8,14 +8,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.Future;
 
 public class testClass {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
-        /*ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
                 new String[]{"classpath:spring-mybatis.xml",
                 "classpath:spring-mvc.xml"});
 
@@ -44,8 +45,9 @@ public class testClass {
         }catch (Exception e){
             System.out.printf("error happend!");
         }
-*/
-    }
+
+    }*/
+
 
     private static Student buildStudent(){
         Student student = new Student();

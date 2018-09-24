@@ -23,7 +23,6 @@ public class App
     @Test
     public void shouldAnswerWithTrue()
     {
-
         try {
             //使用MyBatis提供的Resources类加载mybatis的配置文件
             Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
@@ -40,7 +39,6 @@ public class App
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private Student buildStudent(){
