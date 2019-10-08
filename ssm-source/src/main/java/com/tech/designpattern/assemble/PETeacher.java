@@ -1,5 +1,8 @@
 package com.tech.designpattern.assemble;
 
+/**
+ * 装饰者模式
+ */
 public class PETeacher implements Teacher{
 
     public Teacher teacher;
