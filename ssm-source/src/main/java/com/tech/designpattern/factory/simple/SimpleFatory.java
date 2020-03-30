@@ -1,4 +1,8 @@
-package com.tech.designpattern.factory;
+package com.tech.designpattern.factory.simple;
+
+import com.tech.designpattern.factory.BaoMaCar;
+import com.tech.designpattern.factory.BenChiCar;
+import com.tech.designpattern.factory.Car;
 
 /**
  * 简单工厂模式

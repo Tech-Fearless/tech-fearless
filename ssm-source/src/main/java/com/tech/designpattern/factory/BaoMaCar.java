@@ -4,6 +4,6 @@ public class BaoMaCar extends Car{
 
     @Override
     public void driver(){
-        System.out.printf("BaoMaCar Driver");
+        System.out.printf("一个宝马小轿车司机。");
     }
 }
