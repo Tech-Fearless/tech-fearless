@@ -36,7 +36,7 @@ public class ZookeeperClient {
             return false;
         }
 
-
+        return false;
     }
 
     private static boolean initSnoopyLoader(){
@@ -48,6 +48,7 @@ public class ZookeeperClient {
         }catch (Exception e){
 
         }
+        return false;
     }
 
 }

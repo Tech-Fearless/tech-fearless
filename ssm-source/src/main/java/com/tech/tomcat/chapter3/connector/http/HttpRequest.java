@@ -9,8 +9,8 @@ package com.tech.tomcat.chapter3.connector.http;
 
 import com.tech.tomcat.chapter3.connector.RequestStream;
 import com.tech.tomcat.org.apache.catalina.util.Enumerator;
+import com.tech.tomcat.org.apache.catalina.util.ParameterMap;
 import com.tech.tomcat.org.apache.catalina.util.RequestUtil;
-import org.apache.catalina.util.ParameterMap;
 
 
 import javax.servlet.*;

@@ -15,21 +15,22 @@ public class ConfigReaderUtil {
         if (isDataExist){
             return (String) paraMap.get(key);
         }else {
-            return
+            return "";
         }
     }
 
     private static String getParam(String fileName, String key){
-        String value =
+        return "";
     }
 
     private static Properties addProperties(String propertiesName){
         Properties properties = loadProperties.get(propertiesName);
         if (null == properties){
             synchronized (lockObject){
-                properties = trimProperties()
+                //properties = trimProperties()
             }
         }
+        return null;
     }
 
     private static Properties trimProperties(Properties properties){
@@ -42,6 +43,6 @@ public class ConfigReaderUtil {
                 props.put(key, value);
             }
         }
-        return props
+        return props;
     }
 }
