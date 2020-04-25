@@ -11,47 +11,45 @@ import java.util.*;
 @Component
 public class FilterSupport{
 
-    private static List<AbstractFilter> filterList = new LinkedList<>();
-
     @Autowired
-    private Map<String, AbstractFilter> filterMap;
+    public List<AbstractFilter> filterList;
 
     private AbstractFilter filterStart = null;
-
-    static {
-        filterList.add(new FilterA());
-        filterList.add(new FilterB());
-        filterList.add(new FilterC());
-    }
 
     public FilterSupport() {
     }
 
-    public void initOne() {
-        AbstractFilter nextFilter = null;
-        for (int i = filterList.size() - 1;i >= 0 ;i++){
-            AbstractFilter currentFilter = filterList.get(i);
-            AbstractFilter lastFilter = currentFilter;
-            currentFilter.setNextFilter(nextFilter);
-            nextFilter = lastFilter;
-        }
-        filterStart = nextFilter;
-    }
 
-    public void initTwo(){
-        AbstractFilter nextFilter = null;
-        for (Map.Entry<String, AbstractFilter> filterEntry:filterMap.entrySet()){
-            AbstractFilter filter = filterEntry.getValue();
-            Class filterClass = filter.getClass();
-            if (!filterClass.isAnnotation()){
-                continue;
-            }
-            Order order = (Order)filterClass.getAnnotation(Order.class);
-            if (null == order){
-                continue;
-            }
-            int orderValue = order.value();
+    public void initFilterChain(){
+        if (CollectionUtils.isEmpty(filterList)) {
+            return;
         }
+        Collections.sort(filterList, new Comparator<AbstractFilter>() {
+            @Override
+            public int compare(AbstractFilter o1, AbstractFilter o2) {
+                Class<?> class1 = o1.getClass();
+                Class<?> class2 = o2.getClass();
+
+                Annotation annotation1 = class1.getAnnotation(Order.class);
+                Annotation annotation2 = class2.getAnnotation(Order.class);
+                Integer orderValue1 = ((Order) annotation1).value();
+                Integer orderValue2 = ((Order) annotation2).value();
+
+                return orderValue2 - orderValue1;
+            }
+        });
+
+        AbstractFilter nextFilter = null;
+        for (AbstractFilter filter:filterList) {
+            if (null == filter) {
+                continue;
+            }
+            if (nextFilter != null) {
+                filter.nextFilter = nextFilter;
+            }
+            nextFilter = filter;
+        }
+        filterStart = filterList.get(filterList.size() - 1 );
     }
 
     public AbstractFilter getFilterStart() {

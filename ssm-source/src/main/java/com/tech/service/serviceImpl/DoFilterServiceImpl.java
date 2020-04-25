@@ -18,7 +18,7 @@ public class DoFilterServiceImpl implements DoFilterService {
     @Override
     public String doBusiness(Map<String, String> param) {
         if (filterSupport.getFilterStart() == null){
-            filterSupport.initOne();
+            filterSupport.initFilterChain();
         }
         Filter start = filterSupport.getFilterStart();
         start.doFilter("start");
