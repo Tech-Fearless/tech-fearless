@@ -7,6 +7,11 @@ public class SnoopyLoader {
     private static boolean initSnoopy = false;
 
     public static void initSnoopy(){
+
+        if (initSnoopy){
+            return;
+        }
+
         initSnoopy = true;
 
         ZookeeperClient.initSnoopyClient();

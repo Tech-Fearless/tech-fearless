@@ -1,5 +1,10 @@
 package snoopy.util;
 
+import snoopy.log.SnoopyLogger;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -15,22 +20,68 @@ public class ConfigReaderUtil {
         if (isDataExist){
             return (String) paraMap.get(key);
         }else {
-            return "";
+            return getParams(fileName, key);
         }
     }
 
-    private static String getParam(String fileName, String key){
-        return "";
+    public static String getConfigWithNoCache(String fileName, String key){
+        Properties prop = new Properties();
+        try {
+            String path = ConfigReaderUtil.class.getClassLoader().getResource(fileName).getPath();
+            InputStream is = new FileInputStream(path);
+            prop.load(is);
+        }catch (Exception e){
+           SnoopyLogger.error(ConfigReaderUtil.class, "getConfigWithNoCache", "getConfigWithNoCache error", e);
+        }
+        return prop.getProperty(key);
+    }
+
+    private static String getParams(String fileName, String key){
+        String value = ConfigReaderUtil.queryPropertiesKey(fileName, key);
+        if (value != null && !value.equals("")){
+            paraMap.put(key, value);
+        }
+        return value;
+    }
+
+    private static String queryPropertiesKey(String propertiesName, String key){
+        return addProperties(propertiesName).getProperty(key);
     }
 
     private static Properties addProperties(String propertiesName){
         Properties properties = loadProperties.get(propertiesName);
         if (null == properties){
             synchronized (lockObject){
-                //properties = trimProperties()
+                properties = trimProperties(loadProperties(propertiesName));
+                try {
+                    loadProperties.put(propertiesName,properties);
+                }catch (Exception e){
+                    SnoopyLogger.error(ConfigReaderUtil.class, "addProperties" ,"addProperties error", e);
+                }
             }
         }
         return null;
+    }
+
+    private static Properties loadProperties(String path){
+        Properties props = new Properties();
+        InputStream input = null;
+        try {
+            ClassLoader classLoader = ConfigReaderUtil.class.getClassLoader();
+            input = classLoader.getResourceAsStream(path);
+            props.load(input);
+        }catch (IOException e){
+            SnoopyLogger.error(ConfigReaderUtil.class, "loadProperties", "loadProperties error", e);
+        }finally {
+            try {
+                if (input != null){
+                    input.close();
+                }
+            }catch (Exception e){
+                SnoopyLogger.error(ConfigReaderUtil.class, "loadProperties", "loadProperties error", e);
+            }
+        }
+        return props;
     }
 
     private static Properties trimProperties(Properties properties){
@@ -39,10 +90,12 @@ public class ConfigReaderUtil {
             Object key = entry.getKey();
             Object value = entry.getValue();
             if (value != null){
-                value = ((String) value).replaceAll("\\s*","");
                 props.put(key, value);
+                value = ((String) value).replaceAll("\\s*","");
             }
         }
         return props;
     }
+
+
 }
