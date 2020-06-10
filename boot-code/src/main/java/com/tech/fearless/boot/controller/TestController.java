@@ -35,7 +35,7 @@ public class TestController {
     public int  addStudentToMongo(){
         Student student = new Student();
         student.setName("xiexinjia");
-        student.setAge(28);
+        student.setAge(29);
         student.setAddTime(new Date());
         student.setSex(1);
         student.setUpdateTime(new Date());
