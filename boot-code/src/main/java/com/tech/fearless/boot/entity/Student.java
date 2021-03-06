@@ -25,6 +25,18 @@ public class Student implements Serializable{
 
     private Date updateTime;
 
+    private String grade;
+
+    private String score;
+
+    private String studentId;
+
+    private String meth;
+
+    private String chinese;
+
+    private String english;
+
     public String getId() {
         return id;
     }
@@ -72,4 +84,52 @@ public class Student implements Serializable{
         return this.updateTime;
     }
 
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getMeth() {
+        return meth;
+    }
+
+    public void setMeth(String meth) {
+        this.meth = meth;
+    }
+
+    public String getChinese() {
+        return chinese;
+    }
+
+    public void setChinese(String chinese) {
+        this.chinese = chinese;
+    }
+
+    public String getEnglish() {
+        return english;
+    }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
 }

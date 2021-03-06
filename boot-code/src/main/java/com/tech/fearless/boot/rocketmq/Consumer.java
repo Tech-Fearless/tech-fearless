@@ -9,7 +9,6 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -29,7 +28,7 @@ public class Consumer {
      */
     @Autowired
     public Consumer(RocketConfig rocketConfig) throws MQClientException {
-
+        //定义消费者组
         consumer = new DefaultMQPushConsumer(rocketConfig.getConsumerGroup());
         consumer.setNamesrvAddr(rocketConfig.getNameServer());
         //消费模式:一个新的订阅组第一次启动从队列的最后位置开始消费 后续再启动接着上次消费的进度开始消费

@@ -4,9 +4,13 @@ import com.tech.fearless.boot.entity.Student;
 import com.tech.fearless.boot.mongo.SimpleMongoService;
 import com.tech.fearless.boot.rabbitmq.producer.MsgProducer;
 import com.tech.fearless.boot.rocketmq.Producer;
+import com.tech.fearless.boot.service.StudentService;
+import com.tech.fearless.boot.util.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,8 @@ import java.util.List;
 @Slf4j
 @RestController
 public class TestController {
+
+    private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
     private SimpleMongoService simpleMongoService;
@@ -40,6 +46,21 @@ public class TestController {
     private String topic;
     @Value("${spring.rocketmq.tag}")
     private String tag;
+
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private ExcelUtil excelUtil;
+
+    @ResponseBody
+    @RequestMapping(value = "/student",method = RequestMethod.GET)
+    public String  addStudent(){
+        studentService.addStudent();
+        excelUtil.contextLoads();
+        return "OK!";
+    }
 
     @RequestMapping("/test")
     public String test(){
