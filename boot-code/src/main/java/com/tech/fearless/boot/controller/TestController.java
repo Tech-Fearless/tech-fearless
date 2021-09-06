@@ -54,7 +54,6 @@ public class TestController {
     @Autowired
     private ExcelUtil excelUtil;
 
-    @ResponseBody
     @RequestMapping(value = "/student",method = RequestMethod.GET)
     public String  addStudent(){
         studentService.addStudent();

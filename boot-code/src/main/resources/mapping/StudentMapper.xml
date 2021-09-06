@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.fearless.boot.dao.StudentMapper">
+
+    <resultMap id="student" type="com.tech.fearless.boot.entity.Student">
+        <result column="name" property="name" />
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="AddTime" property="addTime"/>
+        <result column="UpdateTime" property="updateTime"/>
+        <result column="grade" property="grade"/>
+        <result column="score" property="score"/>
+        <result column="studentId" property="studentId"/>
+        <result column="meth" property="meth"/>
+        <result column="chinese" property="chinese"/>
+        <result column="english" property="english"/>
+
+    </resultMap>
+
+    <insert id="insertStudent" parameterType="map">
+        INSERT INTO Student
+        (
+        name,
+        age,
+        sex,
+        AddTime,
+        UpdateTime
+        )
+        VALUES (
+        #{student.name},
+        #{student.age},
+        #{student.sex},
+        #{student.addTime},
+        #{student.updateTime}
+        )
+    </insert>
+
+    <insert id="insertStudentBatch" parameterType="map">
+        INSERT INTO Student
+        (
+        name,
+        age,
+        sex,
+        AddTime,
+        UpdateTime
+        )
+        VALUES
+        <foreach collection="studentList" index="index" separator="," item="student">
+            (
+            #{student.name},
+            #{student.age},
+            #{student.sex},
+            #{student.addTime},
+            #{student.updateTime}
+            )
+        </foreach>
+
+    </insert>
+
+    <select id="loadStudentById" parameterType="map" resultMap="student">
+        SELECT
+        *
+        FROM Student
+        WHERE ID = #{id}
+    </select>
+</mapper>
